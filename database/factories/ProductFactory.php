@@ -26,7 +26,7 @@ class ProductFactory extends Factory
         ];
         return [
             'category_id'=>mt_rand(1,3),
-            'title' => $productNames[array_rand($productNames)],
+            'name' => $productNames[array_rand($productNames)],
             'description' => fake()->text(120),
             'price' => fake()->numberBetween(10000, 100000),
             'image' => ''

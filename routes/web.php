@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,12 +22,18 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.dash-admin');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', fn ()=> view('home'));
 
+// Route::get('/dashboard/kelolaProduct/{product}',ShowController::class, 'show');
+
 Route::resource('/product',ProductController::class);
+
+
+Route::resource('/dashboard/kelolaproducts',DashboardProductController::class)->middleware(['auth', 'verified']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

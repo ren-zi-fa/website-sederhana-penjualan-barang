@@ -6,6 +6,7 @@ use App\Models\Category;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -32,8 +33,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Sport',
         ]);
 
-      
-
+        User::create([
+            'name'=> 'admin',
+            'email'=>'admin@gmail.com',
+            'password'=>'admin123'
+        ]);
         $this->call([
             ProductSeeder::class,
         ]);
