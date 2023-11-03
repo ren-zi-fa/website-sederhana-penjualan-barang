@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardProductController extends Controller
 {
@@ -33,15 +34,19 @@ class DashboardProductController extends Controller
      */
     public function store(Request $request)
     {
-
+       
         $validatedData = $request->validate([
             'price' => 'required',
             'name' => 'required',
             'description' => 'required',
             'category_id' => 'required',
-            // 'image' => 'image|file|max:6144',
+            'image' => '|image|required|',
         
         ]);
+    
+        if($request->file('image')){
+            $validatedData['image'] = $request->file('image')->store('folder-images');
+        }
         Product::create($validatedData);
         return back()->with('success','product telah di tambahkan');
     }
@@ -51,8 +56,8 @@ class DashboardProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::findOrFail($id);
-        return view('dashboard.dash-components.show', compact('product'));
+        // $product = Product::findOrFail($id);
+        // return view('dashboard.dash-components.show', compact('product'));
     }
 
     /**
@@ -76,6 +81,16 @@ class DashboardProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+
+        if ($product->image) {
+            Storage::delete($product->image);
+           
+        }
+    
+        $product::destroy($product->id);
+    
+        return redirect()->back()->with('success', 'gambar telah di hapus');
     }
 }

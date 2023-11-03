@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use App\Models\Province;
+use App\Models\Regency;
 class ProductController extends Controller
 {
     /**
@@ -39,7 +40,14 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-      
+        $provinces = Province::all();
+        $regencies = Regency::all();
+        $product = Product::find($id); // Anda perlu mengganti 'Product' dengan model yang sesuai
+        return view('pages.cart', [
+            'product' => $product,
+            'provinces'=>$provinces,
+            'regencies'=>$regencies,
+        ]);
     }
 
     /**

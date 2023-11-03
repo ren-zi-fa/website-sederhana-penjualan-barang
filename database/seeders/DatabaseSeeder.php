@@ -24,13 +24,16 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         Category::create([
-            'name' => 'Electronic',
+            'name' => 'fashion',
         ]);
         Category::create([
-            'name' => 'Action',
+            'name' => 'pakaian',
         ]);
         Category::create([
-            'name' => 'Sport',
+            'name' => 'kendaraan',
+        ]);
+        Category::create([
+            'name' => 'peralatan',
         ]);
 
         User::create([
@@ -38,8 +41,6 @@ class DatabaseSeeder extends Seeder
             'email'=>'admin@gmail.com',
             'password'=>'admin123'
         ]);
-        $this->call([
-            ProductSeeder::class,
-        ]);
+       
     }
 }

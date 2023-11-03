@@ -25,13 +25,10 @@ Route::get('/dashboard', function () {
     return view('dashboard.dash-admin');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', fn ()=> view('home'));
+Route::get('/', fn ()=> view('home'))->name('home');
 
-// Route::get('/dashboard/kelolaProduct/{product}',ShowController::class, 'show');
 
 Route::resource('/product',ProductController::class);
-
-
 Route::resource('/dashboard/kelolaproducts',DashboardProductController::class)->middleware(['auth', 'verified']);
 
 

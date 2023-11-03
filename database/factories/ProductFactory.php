@@ -16,20 +16,20 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $productNames = [
-            'Laptop',
-            'Smartphone',
-            'Headphones',
-            'Camera',
-            'Tablet',
-            // Tambahkan lebih banyak nama produk sesuai kebutuhan
-        ];
+        // $productNames = [
+        //     'Laptop',
+        //     'Smartphone',
+        //     'Headphones',
+        //     'Camera',
+        //     'Tablet',
+        //     // Tambahkan lebih banyak nama produk sesuai kebutuhan
+        // ];
         return [
-            'category_id'=>mt_rand(1,3),
-            'name' => $productNames[array_rand($productNames)],
-            'description' => fake()->text(120),
-            'price' => fake()->numberBetween(10000, 100000),
-            'image' => ''
+            // 'category_id'=>mt_rand(1,3),
+            // 'name' => $productNames[array_rand($productNames)],
+            // 'description' => fake()->text(120),
+            // 'price' => fake()->numberBetween(10000, 100000),
+            // 'image' => ''
         ];
     }
 }
