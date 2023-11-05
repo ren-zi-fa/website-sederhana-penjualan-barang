@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="SB-Mid-client-Qpb0k5GOCxQPl0Hb"></script>
-    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
+    <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js"
+        data-client-key="Mid-client-qp9sujKyrJlpo-H4"></script>
+    <!-- Note: replace with src="" for Production environment -->
+    <!-- Note: replace with src="https://app.sandbox.midtrans.com/snap/snap.js" for dev environment -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -80,37 +81,7 @@
     
 });
 // midtrans
-var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function () {
-          // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-          window.snap.pay('{{}}', {
-            onSuccess: function(result){
-              /* You may add your own implementation here */
-              alert("payment success!"); console.log(result);
-              sendResponseToForm(result);
-            },
-            onPending: function(result){
-              /* You may add your own implementation here */
-              alert("wating your payment!"); console.log(result);
-              sendResponseToForm(result);
-            },
-            onError: function(result){
-              /* You may add your own implementation here */
-              alert("payment failed!"); console.log(result);
-              sendResponseToForm(result);
-            },
-            onClose: function(){
-              /* You may add your own implementation here */
-              alert('you closed the popup without finishing the payment');
-            }
-          })
-        });
 
-        function sendResponseToForm(result){
-            document.getElementById('payment_hidden').value = JSON.stringify(result);
-        //  alert(document.getElementById('payment_hidden').value);
-        $('#submit_form').submit()
-        }
 
     </script>
 </body>

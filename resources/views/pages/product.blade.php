@@ -47,7 +47,7 @@
                            
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-sm md:text-3xl  font-bold text-gray-900 dark:text-white">Rp{{
+                            <span class="text-sm md:text-3xl  font-bold text-gray-900 dark:text-white">Rp.{{
                                 number_format($product->price,2,",",".") }}</span>
                         </div>
                         <div class="mt-4">

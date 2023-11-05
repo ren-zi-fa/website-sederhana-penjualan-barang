@@ -1,18 +1,25 @@
 <x-main-layout>
     <div class="mt-28 flex justify-center">
-        <form method=""  class="w-full max-w-lg ml-1 sm:ml-20 p-10 sm:p-0 ">
+        <form method="GET" action="/payment/{{$product->id}}"  class="w-full max-w-lg ml-1 sm:ml-20 p-10 sm:p-0 ">
+            @csrf
             <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-10">
+                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-10 hidden">
                     <input type="text" id="disabled-input-2" aria-label="disabled input 2" name="nama_product"
-                        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value="{{$product->name}}"  disabled readonly>
+                        class=" "
+                        value="{{$product->name}}" >
                 </div>
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-10">
+                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-10 hidden">
+                    <input type="text" id="disabled-input-2" aria-label="disabled input 2" name="category_name"
+                        class=""
+                        value="{{$product->category->name}}"  >
+                </div>
+                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-10 hidden">
                     <input type="text" id="disabled-input-2" aria-label="disabled input 2" name="harga"
-                        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class=""
                         value="Rp.{{
-                        number_format($product->price,2," ,",".") }}" disabled readonly>
+                        number_format($product->price,2," ,",".") }}" >
                 </div>
+      
 
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -37,7 +44,7 @@
             <div class="flex flex-wrap -mx-3 mb-2 mt-20">
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label for="underline_select" class="sr-only">Underline select</label>
-                    <select id="underline_select" name="provinsi"
+                    <select id="underline_select" name="provinsi" required
                         class="block py-2.5 px-3 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                         <option selected>Pilih Provinsi</option>
                         @foreach ($provinces as $province)
@@ -48,7 +55,7 @@
                 </div>
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label for="underline_select" class="sr-only">Underline select</label>
-                    <select id="underline_select" name="kabupaten"
+                    <select id="underline_select" name="kabupaten" required
                         class="block py-2.5 px-3 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                         <option selected>Pilih Kabupaten</option>
                         @foreach ($regencies as $regenci)
@@ -62,9 +69,9 @@
             <div class="flex flex-wrap -mx-2 mb-10 mt-4">
                 <label for="message" class="block mb-2 pl-2 text-sm font-medium text-gray-900 dark:text-white">
                     Alamat Lengkap</label>
-                <textarea id="message" rows="4"
+                <textarea id="message" rows="4" name="alamat"  
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Simpang Aru"></textarea>
+                    placeholder="Simpang Aru"  required></textarea>
 
             </div>
             <button type="submit"

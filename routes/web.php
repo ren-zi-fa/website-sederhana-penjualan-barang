@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ShowController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,8 @@ Route::get('/', fn ()=> view('home'))->name('home');
 Route::resource('/product',ProductController::class);
 Route::resource('/dashboard/kelolaproducts',DashboardProductController::class)->middleware(['auth', 'verified']);
 
+Route::get('/payment/{id}', [PaymentController::class, 'payment']);
+Route::post('/payment/{id}',[PaymentController::class, 'payment_post']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

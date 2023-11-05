@@ -42,7 +42,7 @@ class ProductController extends Controller
     {
         $provinces = Province::all();
         $regencies = Regency::all();
-        $product = Product::find($id); // Anda perlu mengganti 'Product' dengan model yang sesuai
+        $product = Product::find($id); 
         return view('pages.cart', [
             'product' => $product,
             'provinces'=>$provinces,
