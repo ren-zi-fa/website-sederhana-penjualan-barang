@@ -32,8 +32,8 @@ Route::get('/', fn ()=> view('home'))->name('home');
 Route::resource('/product',ProductController::class);
 Route::resource('/dashboard/kelolaproducts',DashboardProductController::class)->middleware(['auth', 'verified']);
 
-Route::get('/payment/{id}', [PaymentController::class, 'payment']);
-Route::post('/payment/{id}',[PaymentController::class, 'payment_post']);
+Route::get('/payment/{id}', [PaymentController::class, 'payment'])->middleware(['auth', 'verified']);
+Route::post('/payment/{id}',[PaymentController::class, 'payment_post'])->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
