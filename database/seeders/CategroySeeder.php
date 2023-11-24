@@ -13,6 +13,16 @@ class CategroySeeder extends Seeder
      */
     public function run(): void
     {
-       
+        $categories = [
+            'pakaian',
+            'mainan',
+            'kendaraan',
+            'elektronik',
+        ];
+
+        // Loop melalui array kategori dan tambahkan ke database
+        foreach ($categories as $categoryName) {
+            Category::create(['name' => $categoryName]);
+        }
     }
 }

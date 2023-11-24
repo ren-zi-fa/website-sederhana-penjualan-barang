@@ -1,7 +1,6 @@
 <x-app-layout>
     <div class="p-4 sm:ml-64">
         <div class="hidden sm:block  relative overflow-x-auto shadow-md sm:rounded-lg">
-          
             <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
                 class="flex items-center text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
                 <svg class="w-[15px] h-[15px] text-white dark:text-white" aria-hidden="true"
@@ -62,17 +61,16 @@
                             {{$product->category->name}}
                         </td>
                         <td class="px-6 py-4">
-                            Rp{{number_format($product->price,2,",",".") }}
+                            Rp.{{number_format($product->price,2,",",".") }}
                         </td>
-
-                        <td class="px-6 py-4">
+                        
+                        <td class="px-6 py-4 flex">
+                            <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg  text-sm text-center px-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mr-3" data-modal-target="edit-modal" data-modal-toggle="edit-modal" >Edit</button>
                             <form action="/dashboard/kelolaproducts/{{$product->id}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a href=""
-                                    class="font-medium text-blue-600 dark:text-blue-500 pr-2 hover:underline">Edit</a>
                                 <button type="submit" onclick="return confirm('Yakin data ini dihapus?')"
-                                    class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                                    class="font-medium text-black  bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300  rounded-lg text-sm p-1 text-center dark:focus:ring-yellow-900">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -88,6 +86,7 @@
     </div>
     <!-- Main modal -->
     @include('dashboard.dash-components.modal-input')
+    @include('dashboard.dash-components.modal-edit')
 
     <script>
       function preview() { frame.src=URL.createObjectURL(event.target.files[0]); }

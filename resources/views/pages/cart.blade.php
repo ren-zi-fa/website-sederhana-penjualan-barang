@@ -1,10 +1,18 @@
 <x-main-layout>
-    <div class="grid grid-cols-2 mt-40 ml-4">
+    <div class="mt-40">
+        <small class="text-red-600 top-0 ml-7 pb-4">*Login Terlebih Dahulu Untuk
+            Melanjutkan Pembelian</small>
+   
+    <div class="grid grid-cols-2  ml-4">
+
         <div
             class="max-w-lg  flex justify-center ml-4 p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form method="GET" action="/payment/{{$product->id}}" class="">
                 @csrf
-                <div class="text-center tracking-wide text-gray-700 text-lg font-bold underline pb-6">Formulir Pembelian</div>
+
+                <div class="text-center tracking-wide text-gray-700 text-lg font-bold underline pb-6">Formulir Pembelian
+                </div>
+
                 <div class="flex flex-wrap -mx-3 mb-6 mt-3">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-10 hidden">
                         <input type="text" id="disabled-input-2" aria-label="disabled input 2" name="nama_product"
@@ -16,8 +24,7 @@
                     </div>
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-10 hidden">
                         <input type="text" id="disabled-input-2" aria-label="disabled input 2" name="harga" class=""
-                            value="Rp.{{
-                            number_format($product->price,2," ,",".") }}">
+                            value="{{$product->price}}">
                     </div>
 
 
@@ -108,5 +115,5 @@
             </div>
         </div>
     </div>
-
+</div>
 </x-main-layout>

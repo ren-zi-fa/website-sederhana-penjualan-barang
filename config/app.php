@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Provider Lain
         AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ])->toArray(),
 
     /*

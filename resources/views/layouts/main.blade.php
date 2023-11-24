@@ -80,7 +80,7 @@
     }
     
 });
-// midtrans
+
 
 
     </script>

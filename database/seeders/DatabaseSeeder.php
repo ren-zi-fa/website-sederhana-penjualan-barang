@@ -23,24 +23,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Category::create([
-            'name' => 'fashion',
-        ]);
-        Category::create([
-            'name' => 'pakaian',
-        ]);
-        Category::create([
-            'name' => 'kendaraan',
-        ]);
-        Category::create([
-            'name' => 'peralatan',
-        ]);
+       
 
-        User::create([
-            'name'=> 'admin',
-            'email'=>'admin@gmail.com',
-            'password'=>'admin123'
-        ]);
+      $this->call([
+        IndoRegionSeeder::class,
+        RolePermissionSeeder::class,
+        UserSeeder::class,
+        CategroySeeder::class
+      ]);
        
     }
 }

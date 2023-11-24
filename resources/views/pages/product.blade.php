@@ -1,6 +1,11 @@
 <x-main-layout>
     <div class="container p-4 mt-2">
-        
+        @if (session('alert-success'))
+        <script>alert("{{session('alert-success')}}")</script>     
+        @elseif(session('alert-failed'))
+        <script>alert("{{session('alert-failed')}}")</script>     
+            
+        @endif
         <div class="grid grid-cols-2 md:grid-cols-4 mt-20">
             @foreach ($products as $product)
             <div class="py-2 px-2">

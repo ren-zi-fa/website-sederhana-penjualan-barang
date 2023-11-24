@@ -1,28 +1,45 @@
 <x-main-layout>
 
+  <div class="grid grid-cols-2  mt-40 ">
+    <div
+      class="max-w-sm p-6  mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <img class="h-auto rounded-lg" src="{{url('storage/'.$product->image)}}" alt="product image" />
+      <ul class="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400 py-5">
+        <li class="flex items-center">
+            <svg class="w-3.5 h-3.5 mr-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+             </svg>
+             Nama Product: {{$product->name}}
+        </li>
+        <li class="flex items-center">
+            <svg class="w-3.5 h-3.5 mr-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+             </svg>
+             Harga: Rp.{{
+              number_format($product->price,2,",",".") }}
+        </li>
+      
+      </ul>
+     
 
-    <div class="max-w-sm p-6 mt-40 mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <img class="p-8 rounded-t-lg" src="{{url('storage/'.$product->image)}}"
-        alt="product image" />
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 capitalize">Nama Product: {{$product->name}}</p>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Harga: Rp.{{
-            number_format($product->price,2,",",".") }}</p>
-
-        <button id="pay-button" type="submit"
-        class=" inline-flex items-center ml-20 px-7 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pay!</button>
+      <button id="pay-button" type="submit"
+        class=" inline-flex items-center px-36 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pay!</button>
+    </div>
+    <div class="ml-10 hidden sm:block">
+      <img src="{{url('shopping.png')}}" class="rounded-full w-96 h-96 " alt="">
     </div>
 
+  </div>
+
+  <form action="" method="POST" id="submit_form">
+    @csrf
+    @method('POST')
+    <input type="hidden" name="json" id="payment_hidden">
+  </form>
 
 
-    <form action="" method="POST" id="submit_form">
-        @csrf
-        @method('POST')
-        <input type="hidden" name="json" id="payment_hidden">
-    </form>
-
-
-    <script type="text/javascript">
-        var payButton = document.getElementById('pay-button');
+  <script type="text/javascript">
+    var payButton = document.getElementById('pay-button');
         payButton.addEventListener('click', function () {
           // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
           window.snap.pay('{{$snap_token}}', {
@@ -53,5 +70,5 @@
         //  alert(document.getElementById('payment_hidden').value);
         $('#submit_form').submit()
         }
-    </script>
+  </script>
 </x-main-layout>

@@ -91,6 +91,6 @@ class DashboardProductController extends Controller
     
         $product::destroy($product->id);
     
-        return redirect()->back()->with('success', 'gambar telah di hapus');
+        return redirect()->back()->with('success', 'product telah dihapus');
     }
 }
