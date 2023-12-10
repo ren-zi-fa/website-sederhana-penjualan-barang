@@ -20,11 +20,12 @@ class PaymentController extends Controller
         $order_id = $product->id;
         $name_product = $product->name;
         $order_id = $product->id;
-        $gross_amount = $harga_produk;
+        $diskon = $harga_produk * (10 / 100);
+        $gross_amount = $harga_produk - $diskon;
         // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = 'Mid-server-6ByDJaWCRu_7qBuCypeXIPmb';
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-MMfca0oE4FfFLd8qn54FnoXh';
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = true;
+        \Midtrans\Config::$isProduction = false;
         // Set sanitization on (default)
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
@@ -39,7 +40,7 @@ class PaymentController extends Controller
             'item_details' => array(
                 [
                     'id' => $order_id,
-                    'price' => $harga_produk,
+                    'price' => $gross_amount,
                     'quantity' => 1,
                     'name' => $name_product
                 ],
@@ -81,7 +82,20 @@ class PaymentController extends Controller
             'pdf_url' => isset($json->pdf_url) ? $json->pdf_url : null,
         ]);
 
-        return $order->save() ? redirect(url('/product'))->with('alert-success', 'Order berhasil silahkan bayar jika ingin dikirim') :
-            redirect(url('/product'))->with('alert-failed', 'Order gagal ada kesalahan');
+        return $order->save() ? redirect(url('/product'))->with('payment-success',' Kami sedang menyiapkan dan mengirim pesanan anda silahkan klik') : redirect(url('/product'))->with('alert-failed', 'Order gagal ada kesalahan');
     }
+
+    // public function update(Request $request, Product $product)
+    // {
+    //     $product->name = $request->input('name');
+    //     $product->description = $request->input('description');
+    //     $product->price = $request->input('price');
+    //     $product->category_id = $request->input('category_id');
+    
+    //     // Pastikan untuk menangani file gambar jika ada
+    
+    //     $product->save();
+    
+    //     return redirect('/dashboard/kelolaproducts')->with('success', 'Produk telah diperbarui');
+    // }
 }

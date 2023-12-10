@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,18 +28,21 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
-        if(Auth::user()->hasRole('admin')){
+    
+        $role = $request->input('role');
+       
+        if (Auth::user()->hasRole('admin')) {
             return redirect()->to('dashboard/kelolaproducts');
+        } elseif ($role === 'penjual' && Auth::user()->hasRole('penjual')) {
+            return redirect()->to('dashboard/kelolaproducts')->with('login-success','selamat datang');
+        } elseif ($role === 'pembeli' && Auth::user()->hasRole('pembeli')) {
+            return redirect()->to('product')->with('login-success','selamat datang');
+        } else {
+            Auth::logout(); 
+            return redirect('/login')->with('error', 'role yang anda pilih salah');
         }
-        if(Auth::user()->hasRole('penjual')){
-            return redirect()->to('dashboard/kelolaproducts');
-        }
-        if(Auth::user()->hasRole('pembeli')){
-            return redirect()->to('product');
-        }
-
-        return redirect()->intended(RouteServiceProvider::HOME);
     }
+    
 
     /**
      * Destroy an authenticated session.
@@ -51,6 +55,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

@@ -1,18 +1,16 @@
 <x-main-layout>
     <div class="mt-40">
-        <small class="text-red-600 top-0 ml-7 pb-4">*Login Terlebih Dahulu Untuk
-            Melanjutkan Pembelian</small>
+        <small class="dark:text-yellow-200 text-red-500 font-medium top-0 ml-7 "> <span class="text-red-600 text-xl">*</span>Login Terlebih Dahulu Untuk Melanjutkan Pembelian</small>
    
     <div class="grid grid-cols-2  ml-4">
 
         <div
-            class="max-w-lg  flex justify-center ml-4 p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            class="max-w-lg  flex justify-center ml-4 p-4 mt-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form method="GET" action="/payment/{{$product->id}}" class="">
                 @csrf
 
                 <div class="text-center tracking-wide text-gray-700 text-lg font-bold underline pb-6">Formulir Pembelian
                 </div>
-
                 <div class="flex flex-wrap -mx-3 mb-6 mt-3">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-10 hidden">
                         <input type="text" id="disabled-input-2" aria-label="disabled input 2" name="nama_product"
@@ -35,7 +33,7 @@
                         </label>
                         <input
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-last-name" type="text" name="name" placeholder="Renzty" required>
+                            id="grid-last-name" type="text" name="name" placeholder="Rentzy" required>
                     </div>
                     <div class="w-full md:w-1/2 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -95,23 +93,28 @@
         </div>
 
         <div
-            class="max-w-sm mx-auto hidden sm:block bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-
-            <img class="rounded-t-lg sm:w-full w-1/2 p-4" src="{{url('storage/'.$product->image)}}"
+            class="max-w-sm mx-auto hidden sm:block bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-5">
+            <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <img class="p-8 rounded-t-lg h-60 w-full overflow-hidden" src="{{url('storage/'.$product->image)}}"
                 alt="product image" />
+                <div class="text-lg text-center font-semibold capitalize tracking-tight text-red-600 dark:text-indigo-500 py-4 ">
+                    {{$product->name}}
+                <div class="text-sm md:text-xl  font-bold text-gray-900 dark:text-white line-through">Rp{{
+                    number_format($product->price,2,",",".") }}</div> 
+                </div>
+            </div>
+         
             <div class="sm:px-5 sm:pb-5 px-3 pb-2">
-                <a href="#">
-                    <div class="text-xl mt-3 font-semibold uppercase tracking-tight text-red-600 dark:text-indigo-500">
-                        {{$product->name}}
+               
+                    <div class="flex items-center justify-between mt-3">
+                        
                     </div>
                     <div class="flex items-center justify-between mt-3">
-                        <span class="text-sm md:text-3xl  font-bold text-gray-900 dark:text-white">Rp{{
-                            number_format($product->price,2,",",".") }}</span>
+                        <?php $diskon = $product->price*(10/100);?>
+                        <div class="text-sm md:text-xl font-bold text-gray-900 dark:text-white ">Total yg harus dibayar: <span class="text-red-400"> Rp{{
+                            number_format($product->price-$diskon,2,",",".") }}</span></div> 
                     </div>
-                    <div class="text-xs pt-8 font-semibold lowercase tracking-tight text-red-600 dark:text-green-400">
-                        {{$product->description}}
-                    </div>
-                </a>
+                  
             </div>
         </div>
     </div>

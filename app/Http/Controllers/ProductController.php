@@ -15,7 +15,8 @@ class ProductController extends Controller
     {
 
         return view ('pages.product',[
-            'products'=>Product::with('category')->latest()->get()
+            'products'=>Product::with('category')->latest()->get(),
+            // "searchproduct" => Product::with('category')->latest()->search()->get()
         ]);
     }
 
@@ -43,6 +44,7 @@ class ProductController extends Controller
         $provinces = Province::all();
         $regencies = Regency::all();
         $product = Product::find($id); 
+      
         return view('pages.cart', [
             'product' => $product,
             'provinces'=>$provinces,

@@ -63,9 +63,9 @@ class KelolaPesananController extends Controller
     public function destroy(string $id)
     {
         $order = Order::findOrFail($id);
-    
+        
         $order::destroy($order->id);
     
-        return redirect()->back()->with('success', 'riwayat orderan telah dihapus');
+        return redirect()->back()->with('success', 'Riwayat Orderan Telah Dihapus');
     }
 }

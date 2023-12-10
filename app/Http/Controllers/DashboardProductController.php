@@ -16,9 +16,8 @@ class DashboardProductController extends Controller
     {
         return view('dashboard.dash-components.kelolaProduct', [
             'products' => Product::with('category')->latest()->get(),
-            'categories'=>Category::all()
+            'categories' => Category::all()
         ]);
-
     }
 
     /**
@@ -34,21 +33,21 @@ class DashboardProductController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $validatedData = $request->validate([
             'price' => 'required',
             'name' => 'required',
             'description' => 'required',
             'category_id' => 'required',
             'image' => '|image|required|',
-        
+
         ]);
-    
-        if($request->file('image')){
+
+        if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('folder-images');
         }
         Product::create($validatedData);
-        return back()->with('success','product telah di tambahkan');
+        return back()->with('success', 'product telah di tambahkan');
     }
 
     /**
@@ -71,9 +70,22 @@ class DashboardProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->category_id = $request->input('category_id');
+        $product->image = $request->input('image');
+       
+
+        // Jika ada pembaruan pada gambar, atur kolom gambar di sini
+
+        $product->save();
+
+
+        return redirect('/dashboard/kelolaproducts')->with('success', 'product telah di perbaharui');
     }
 
     /**
@@ -86,11 +98,10 @@ class DashboardProductController extends Controller
 
         if ($product->image) {
             Storage::delete($product->image);
-           
         }
-    
+
         $product::destroy($product->id);
-    
+
         return redirect()->back()->with('success', 'product telah dihapus');
     }
 }

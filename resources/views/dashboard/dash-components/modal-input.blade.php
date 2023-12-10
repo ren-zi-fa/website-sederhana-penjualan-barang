@@ -39,9 +39,9 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">deskripsi
                                 product
                             </label>
-                            <input type="text" id="description" name="description"
-                                class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('description') bg-red-50 border border-red-500 text-red-900  @enderror"
-                                value="{{old('description')}}" placeholder="langka dan berkualitas">
+                            <textarea type="text" id="description" name="description" class="text-sm rounded-lg h-40 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('description') bg-red-50 border border-red-500 text-red-900  @enderror"
+                                value="{{old('description')}}" placeholder="">
+                            </textarea>
                             @error('description')
                             <div class="text-red-500 font-medium">{{$message}}</div>
                             @enderror
@@ -115,5 +115,5 @@
 </div>
 
 <script>
-    function preview() { frame.src=URL.createObjectURL(event.target.files[0]); }
+    function preview(){ frame.src=URL.createObjectURL(event.target.files[0]); }
 </script>
