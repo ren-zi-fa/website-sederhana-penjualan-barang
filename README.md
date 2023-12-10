@@ -43,7 +43,10 @@ ZARAZ adalah web penjualan barang sederhana yang menggunakan midtrans sebagai me
 - dan di terminal berikutnya jalankan 
     ```sh
     npm run dev
-   
+
+## Screenshots
+
+![App Screenshot](https://github.com/ren-zi-fa/website-sederhana-penjualan-barang/blob/main/Screenshot%20(180).png)
     
 ## Authors
 
